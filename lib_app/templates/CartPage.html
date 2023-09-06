@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Cart</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap" rel="stylesheet">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<style>
+	body{
+	font-family: 'Poppins', sans-serif;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.wrapper{
+	display: flex;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+#sidebar{
+	min-width: 250px;
+	max-width: 250px;
+	color: #fff;
+	transition: all 0.4s; 
+}
+
+
+#sidebar .sidebar-header{
+	padding: 30px;
+}
+#sidebar ul.components{
+	padding: 20px 0;
+	
+}
+
+
+#sidebar ul li a{
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+}
+
+a[data-toggle="collapse"]{
+	position: relative;
+}
+
+#content{
+	width: 100%;
+	padding-bottom: 30px;
+	min-height: 162vh;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+.table-cont{
+		max-width: 80% !important;
+
+	   }
+
+
+</style>
+<body>
+
+
+<!-- navbar -->
+<div class="wrapper">
+	
+ <nav id="sidebar" class="bg-info">
+ 	
+ 	 <div class="sidebar-header bg-info" >
+ 	 	<h2 style="font-family: 'Chakra Petch', sans-serif;">Library Management</h2>
+ 	 </div>
+
+	 <hr>
+
+ 	 <ul class="lisst-unstyled components">
+		<li class="active pb-3">
+			<a href="{% url 'userhomePage' %}" class="nav-item  text-white "
+				style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/hm.png' %}" width="30px" height="30px" alt="">  HOME </a>
+		</li>
+		
+		<li class="pb-3">
+			<a href="{% url 'userProfile' user.id %} " class="nav-item  text-white"
+				style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/user3.png' %}" width="30px" height="30px" alt=""> PROFILE</a>
+		</li>
+		<li class="pb-3">
+			<a href="{% url 'userBook' %}" class="text-white " style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;" ><img src="{% static 'images/buk.png' %}" width="30px" height="30px" alt=""> BOOKS</a>
+		</li>
+ 	 	 	 	
+				  <li>
+					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white" style="text-decoration: none;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/setting.gif' %}" width="40px" height="40px" alt=""></a>
+					<ul class="collapse list-unstyled" id="pageSubmenu">
+						<li>
+							<a href="{% url 'logout' %}" class="text-white" style="text-decoration: none;font-family: 'Chakra Petch', sans-serif;font-size: 23px;">LOGOUT</a>
+						</li>
+ 	 		</ul>
+ </nav>
+
+
+<div id="content" >	
+	
+  <nav class="navbar navbar-expand-lg navbar-light ">
+	<button type="button" id="sidebarCollapse" class="btn  btn-light shadow-lg border-secondary">
+		<img src="{% static 'images/menu.png' %}" width="10px" height="10px" alt="">
+	</button>
+ 
+  	<div class="container-fluid">
+  		
+  	</div>
+  	  </nav>
+
+<br><br>
+
+<!-- message -->
+<div class="col text-center w-50 mx-auto" >
+    {% for message in messages %}
+
+    <h3 > 
+        <div class="alert alert-success text-center">
+            {{ message }}
+        </div> 
+    </h3>
+    {% endfor %}
+</div>
+<!-- message -->
+<br><br>
+
+<div class="container text-center mx-auto">
+	<h1 class="text-center text-info"><b>ORDER DETAILS</b></h1>
+	<br><br>
+    </div>
+
+
+
+
+	<div class="container table-cont">
+		<table class="table table-striped table-responsive ">
+		  <thead class="bg-dark text-white text-center" style="font-size: 23px; ">
+			 <tr class="table-bordered">
+				 <th>BOOK NAME</th>
+				 <th>AUTHOR NAME</th>
+				 <th>STOCK</th>
+				 <th>IMAGE</th>
+				 <th>QUANTITY</th>
+				 <th>PRICE</th>
+				 <th colspan="2">ACTIONS</th>
+			 </tr>
+		 </thead>
+		 <tbody>
+			<form action="{% url 'Paymentpage'  %}" method="POST" enctype="multipart/form-data">
+			 {% csrf_token %} 
+			 {% for h in carts %}
+			 <tr class="text-center table-bordered" style="font-size: 23px; ">
+				 <td> {{ h.Book.Book_name }} </td>
+				 <td> {{ h.Book.Author_name }} </td>
+				 <td> {{ h.Book.Stock }} </td>
+				 <td> <img src="{{ h.Book.Book_Image.url }}" width="40px" height="40px" alt=""> </td>
+
+				 <td><button type="button" class="decrbtn text-danger" data-cartid="{{ h.id }}">-</button>
+				 <input type="text" name="uquantity{{ h.id }}" class="w-25 text-center" min="0" value="0" class="quant"> 
+				 <button type="button" class="incrbtn text-danger" data-cartid="{{ h.id }}">+</button>
+
+				 <td> {{ h.Book.Price }}</td>
+				 <td><a href="{% url 'cartdelete' h.id%}" class="btn btn-danger"><b>DELETE</b></a></td>
+            	 <td><a href="{% url 'userBook' %}" class="btn btn-danger"><b>ADD MORE</b></a></td>
+			 </tr>
+			 {% endfor %}
+			 
+		 </tbody>
+		</table>
+		<div class="container text-center mt-5">
+			<button class="btn btn-danger px-5" type="submit" style="text-decoration: none;"><b>PLACE ORDER</b></button>
+		</div>
+		</form>
+
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+			const decrebtn =document.querySelectorAll('.decrbtn');
+			const quant =document.querySelectorAll('.quant');
+			const increbtn =document.querySelectorAll('.incrbtn');
+
+			decrebtn.forEach(button =>{
+				button.addEventListener('click',()=>{
+					const cartid=button.getAttribute('data-cartid');
+					const input = document.querySelector(`[name="uquantity${cartid}"]`);
+					input.value=Math.max(parseInt(input.value)-1,0);
+				});
+			});
+
+			increbtn.forEach(button =>{
+				button.addEventListener('click',()=>{
+					const cartid=button.getAttribute('data-cartid');
+					const input = document.querySelector(`[name="uquantity${cartid}"]`);
+					input.value= parseInt(input.value)+1;
+
+				});
+			});
+		});
+
+		</script>
+
+		 </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="container">
+   <table class="table table-striped table-responsive ">
+     <thead class="bg-dark text-white text-center">
+        <tr class="table-bordered">
+            <th></th>
+                                             <th>AUTHOR NAME</th>
+                                                <th>STOCK</th>
+                                                <th>IMAGE</th>
+                                                <th>QUANTITY</th>
+                                                <th>PRICE</th>                                   
+                                                <th colspan="2">ACTIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form action="{% url 'Paymentpage'  %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for h in carts %}
+        
+            
+        <tr class="text-center">
+            <td>{{ h.Book.Book_name }}</td>
+            <td>{{ h.Book.Author_name }}</td>
+            <td>{{ h.Book.Stock }}</td>
+            <td>
+                <img src="{{ h.Book.Book_Image.url }}" width="40px" height="40px" alt="">
+                 </td>
+            <td ><input type="number" name="uquantity{{ h.id }}" class="w-25 text-center" min="0" value="0"></td>
+            <td>{{ h.Book.Price }}</td>
+            <td><a href="{% url 'cartdelete' h.id%}" class="btn btn-danger"><b>DELETE</b></a></td>
+            <td><a href="{% url 'userBook' %}" class="btn btn-danger"><b>ADD MORE</b></a></td>
+            
+
+        </tr>
+        {% endfor %}
+    
+    
+    </tbody>
+   </table>
+   <div class="container text-center mt-5">
+	<button class="btn btn-danger" type="submit" style="text-decoration: none;"><b>PLACE ORDER</b></button>
+</div>
+</form>
+	</div> -->
+
+</div>
+     
+</div>
+    
+</div>
+
+</div>
+
+<!-- navbar -->
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function () {
+				$('#sidebarCollapse').on('click', function () {
+					$('#sidebar').toggleClass('active');
+				});
+			});
+	
+	</script>
+	
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Admin Home</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap" rel="stylesheet">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<style>
+	body{
+	font-family: 'Poppins', sans-serif;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.wrapper{
+	display: flex;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+#sidebar{
+	min-width: 250px;
+	max-width: 250px;
+	color: #fff;
+	transition: all 0.4s; 
+}
+
+
+#sidebar .sidebar-header{
+	padding: 30px;
+}
+#sidebar ul.components{
+	padding: 20px 0;
+	
+}
+
+
+#sidebar ul li a{
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+}
+
+a[data-toggle="collapse"]{
+	position: relative;
+}
+
+#content{
+	width: 100%;
+	padding-bottom: 30px;
+	min-height: 100vh;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+.table-cont{
+		max-width: 90% !important;
+
+	   }
+
+
+
+</style>
+<body>
+
+
+<!-- navbar -->
+<div class="wrapper">
+	
+ <nav id="sidebar" class="bg-info">
+ 	
+ 	 <div class="sidebar-header bg-info" >
+ 	 	<h2 style="font-family: 'Chakra Petch', sans-serif;">Library Management</h2>
+ 	 </div>
+
+	 <hr>
+
+ 	 <ul class="lisst-unstyled components">
+		<li class="active pb-3">
+			<a href="{% url 'adminPage' %}" class="nav-item   text-white" style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/hm.png' %}" alt="" width="30px" height="30px"> HOME</a>
+		</li>
+
+		<li class="pb-3">
+		  <a href="{% url 'BookAdmin' %}" class="nav-item bg-dark text-white" style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/buk.png' %}" width="30px" height="30px" alt=""> BOOK</a>
+	  </li>
+	  <li class="pb-3">
+		  <a href="{% url 'approval' %}" class="text-white" style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/req.png' %}" width="30px" height="30px" alt=""> REQUEST <b class="text-danger bg-warning border border-dark rounded px-1">{{usercount}}</b></a>
+	  </li>
+				  <li class="pb-3">
+					<a href="{% url 'AdminUser' %}" class="text-white" style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/user3.png' %}" width="30px" height="30px" alt=""> USER</a>
+				</li>
+
+				  <li>
+					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white" style="text-decoration: none;font-size: 23px"><img src="{% static 'images/setting.gif' %}" width="40px" height="40px" alt=""></a>
+					<ul class="collapse list-unstyled" id="pageSubmenu">
+						<li>
+							<a href="{% url 'logout' %}" class="text-white" style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;">LOGOUT</a>
+						</li>
+ 	 		</ul>
+ </nav>
+
+
+<div id="content" >	
+	
+  <nav class="navbar navbar-expand-lg navbar-light ">
+	<button type="button" id="sidebarCollapse" class="btn  btn-light shadow-lg border-secondary">
+		<img src="{% static 'images/menu.png' %}" width="10px" height="10px" alt="">
+	</button>
+    <span>&nbsp;&nbsp;&nbsp;</span>
+    <button type="button" class="btn btn-outline-danger  ">
+		<a href="{% url 'BookAdmin' %}" style="text-decoration: none;" class="text-dark">BOOK HOME</a>
+	</button>
+  	<div class="container-fluid">
+  		
+  	</div>
+  	  </nav>
+
+<br>
+
+<!-- message -->
+<div class="col text-center w-50 mx-auto" >
+    {% for message in messages %}
+
+    <h3 > 
+        <div class="alert alert-success text-center">
+            {{ message }}
+        </div> 
+    </h3>
+    {% endfor %}
+</div>
+<!-- message -->
+<br>
+
+<div class="container text-center mx-auto">
+	<h1 class="text-center text-info"><b>BOOK DETAILS</b></h1>
+	<br><br>
+    </div>
+    <div class="container table-cont">
+   <table class="table table-striped table-responsive ">
+     <thead class="bg-dark text-white text-center" style="font-size: 23px; ">
+        <tr class="table-bordered">
+            <th>PUBLISHER ID</th>
+            <th>BOOK NAME</th>
+			<th>AUTHOR NAME</th>
+            <th>STOCK</th>
+            <th>PRICE</th>
+            <th>IMAGE</th>
+            <th>ADDED ON</th>
+            <th colspan="2">ACTIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+		{% for b in books %}
+        <tr class="text-center table-bordered" style="font-size: 23px; ">
+            <td> {{ b.Publisher_ID }} </td>
+			<td>  {{ b.Book_name }} </td>
+			<td> {{ b.Author_name }} </td>
+			<td> {{ b.Stock }} </td>
+            <td> {{ b.Price }} </td>
+            <td> 
+                 <img src="{{ b.Book_Image.url }}" width="50px" height="50px" alt="">
+            </td>
+            <td> {{ b.Book_date }} </td>
+			<td><button class="btn btn-danger "><a class="text-white" style="text-decoration: none;" href="{% url 'adminEditBookPage' b.id%} "><b>EDIT</b></a></button></td>
+			<td><button class="btn btn-danger "><a class="text-white" style="text-decoration: none;" href="{% url 'adminDeleteBook' b.id%} "><b>DELETE</b></a></button></td>
+        </tr>
+		{% endfor %}
+    </tbody>
+   </table>
+	</div>
+</div>
+     
+</div>
+    
+</div>
+
+</div>
+
+<!-- navbar -->
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function () {
+				$('#sidebarCollapse').on('click', function () {
+					$('#sidebar').toggleClass('active');
+				});
+			});
+	
+	</script>
+	
+
+</body>
+</html>

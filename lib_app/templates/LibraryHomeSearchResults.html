@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Home</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    /* navbar */
+    .input-group {
+      width: 40%;
+    }
+
+    #item {
+      width: 20px;
+    }
+
+    .card-deck {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        grid-gap: 1rem;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    p{
+        font-size: 23px;
+    }
+
+    @media (max-width: 768px) {
+      .navtext{
+        text-align: center;
+        width: 100%;
+        margin-right: 0;
+  
+      }
+    }
+    .navsetting {
+    padding-right: 1%;
+    
+  }
+  </style>
+
+</head>
+
+<body>
+
+
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-info shadow-lg">
+    <a class="navbar-brand mr-5 text-light" href="#"><h3 style="font-family: 'Chakra Petch', sans-serif;">Library Management</h3></a>
+    <button class="navbar-toggler mb-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto nav-pills ">
+        <li class="nav-item mr-auto px-3 navtext">
+          <a class="nav-link text-white   text-center p-2"
+            href="{% url 'libraryhomePage' %}" style="font-size: 21px;font-family: 'Chakra Petch', sans-serif;"><b>HOME</b><span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item mr-auto px-3 navtext">
+          <a class="nav-link text-white bg-dark active text-center p-2"
+            href="{% url 'libraryhomeBooks' %}" style="font-size: 21px;font-family: 'Chakra Petch', sans-serif;"><b>BOOKS</b></a>
+        </li>
+        <li class="nav-item mr-auto px-3 navtext">
+          <a class="nav-link text-white  text-center p-2 "
+            href="{% url 'libraryhomeAboutPage' %}" style="font-size: 21px;font-family: 'Chakra Petch', sans-serif;"><b>ABOUT</b></a>
+        </li>
+        <li class="nav-item mr-auto px-3 navtext">
+          <a class="nav-link text-white  text-center p-2"
+            href="{% url 'libraryhomeContactPage' %}" style="font-size: 21px;font-family: 'Chakra Petch', sans-serif;"><b>CONTACT</b></a>
+        </li>
+      </ul>
+
+
+      <!-- search button -->
+      <form action="{% url 'search' %}" class="input-group py-2 navtext" method="GET" >
+        <input class="form-control " type="search" placeholder="Search" name="search" aria-label="Search">
+
+        <button class="btn btn-light border-secondary" type="submit"><img src="{% static 'images/search.png' %}"
+            width="20px" height="20px" alt=""></button>
+      </form>
+      <!-- search button -->
+
+
+
+      <div class="ml-auto navsetting">
+        <ul class="navbar-nav navtext">
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img src="{% static 'images/setting.gif' %}" width="40px" height="40px" alt="">
+            </a>
+            <div class="dropdown-menu bg-info text-center" id="item" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item bg-info text-white text-center" href="{% url 'loginPage' %}" style="font-size: 21px;font-family: 'Chakra Petch', sans-serif;">LOGIN</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'loginrequired' %}" class="nav-link  "><img src="{% static 'images/shopping-cart.png' %}" width="40px" height="40px" alt=""></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- navbar -->
+
+
+  <br><br>
+
+
+
+
+<!-- message -->
+<div class="col text-center w-50 mx-auto" >
+    {% for message in messages %}
+
+    <h3 > 
+        <div class="alert alert-success text-center">
+            {{ message }}
+        </div> 
+    </h3>
+    {% endfor %}
+</div>
+<!-- message -->
+
+
+
+
+<h1 class="text-info mb-3 text-center">SEARCH RESULTS</h1>
+
+<div class="container">
+  <div class="card-deck">
+      {% for b in books %}
+      <div class="card m-2 bg-light">
+          <img class="card-img-top mx-auto mt-2" src="{{ b.Book_Image.url }}" style="width: 50%;" height="200px" >
+          <div class="card-body">
+
+              <h4 class="card-title text-center">{{ b.Book_name }}</h4>
+              <hr>
+              <p class="card-text text-center">Author: {{ b.Author_name }}</p>
+              <p class="card-text text-center">In Stock: {{ b.Stock }}</p>
+
+          </div>
+          <div class="text-center mt-2">
+              <a href="{% url 'UserCartAdd' b.id %} " class="btn btn-danger mb-4"><b>ADD TO CART</b></a>
+              <a href="{% url 'UserRentBookPage' b.id %}" class="btn btn-danger mb-4"><b>RENT BOOK</b></a>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <h2 class="text-info mb-3">Search Results</h2>
+    <br>
+    <div class="card-deck ">
+        {% for b in books %}
+        
+            <div class="card col-lg-12 col-xl-4 col-xxl-6 col-md-12 col-sm-12 border-info ">
+
+            
+            <img src="{{ b.Book_Image.url }}" width="30px" height="350px" class="card-img-top p-2"
+                        alt="">                          
+
+                        
+                            <div class="card h-100 mt-3 ">
+                                <ul class="list-group list-group-flush"></ul>
+                                <li class="list-group-item">{{ b.Book_name }}</li>
+                                <li class="list-group-item">Author:  {{ b.Author_name }} </li>
+                                <li class="list-group-item">Availablility: {{ b.Stock }}</li>
+                                </ul>
+
+                            </div>
+                        
+                            <div class="text-center mt-5">
+                                <a href="{% url 'loginrequired' %}" class="btn btn-danger mb-4">ADD TO CART</a>
+                                <a href="{% url 'loginrequired' %}" class="btn btn-danger mb-4">RENT BOOK</a>
+                            </div> -->
+                            
+
+
+                        
+                    
+                        </div>
+
+        
+        {% endfor %}
+    </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<br><br><br><br>
+
+
+
+
+
+</body>
+
+</html>

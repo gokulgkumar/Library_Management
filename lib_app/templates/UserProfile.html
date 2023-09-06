@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Profile</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap" rel="stylesheet">
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<style>
+
+
+	body{
+	font-family: 'Poppins', sans-serif;
+}
+
+/* side-nav bar */
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.wrapper{
+	display: flex;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+#sidebar{
+	min-width: 250px;
+	max-width: 250px;
+	color: #fff;
+	transition: all 0.4s; 
+}
+
+
+#sidebar .sidebar-header{
+	padding: 30px;
+}
+#sidebar ul.components{
+	padding: 20px 0;
+	
+}
+
+
+#sidebar ul li a{
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+}
+
+a[data-toggle="collapse"]{
+	position: relative;
+}
+
+#content{
+	width: 100%;
+	padding-bottom: 30px;
+	min-height: 159vh;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+/* side-nav bar */
+
+
+ /* search bar */
+.input-group{
+        width: 40%;
+       }
+	   p{
+        font-size: 22px;
+    }
+
+
+</style>
+<body>
+
+
+<!-- navbar -->
+<div class="wrapper">
+	
+ <nav id="sidebar" class="bg-info">
+ 	
+ 	 <div class="sidebar-header bg-info" >
+ 	 	<h2 style="font-family: 'Chakra Petch', sans-serif;">Library Management</h2>
+ 	 </div>
+
+	 <hr>
+
+	 <ul class="list-unstyled components">
+        <li class="active pb-3">
+            <a href="{% url 'userhomePage' %}" class="nav-item   text-white "
+                style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/hm.png' %}" width="30px" height="30px" alt="">  HOME </a>
+        </li>
+        
+        <li class="pb-3">
+            <a href="{% url 'userProfile' user.id %} " class="nav-item bg-dark text-white"
+                style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/user3.png' %}" width="30px" height="30px" alt=""> PROFILE</a>
+        </li>
+        <li class="pb-3">
+            <a href="{% url 'userBook' %}" class="text-white " style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;" ><img src="{% static 'images/buk.png' %}" width="30px" height="30px" alt=""> BOOKS</a>
+        </li>
+				  <li>
+					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white" style="text-decoration: none;font-size: 23px"><img src="{% static 'images/setting.gif' %}" width="40px" height="40px" alt=""></a>
+					<ul class="collapse list-unstyled" id="pageSubmenu">
+						<li>
+							<a href="{% url 'logout' %}" class="text-white" style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;">LOGOUT</a>
+						</li>
+ 	 		</ul>
+ </nav>
+
+
+<div id="content" >	
+	
+  <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+	<button type="button" id="sidebarCollapse" class="btn  btn-light shadow-lg border-secondary">
+		<img src="{% static 'images/menu.png' %}" width="10px" height="10px" alt="">
+	</button>
+  	  </nav>
+
+<br><br>
+<div class="container">
+<h1 class="text-info text-center"><b>PROFILE SETTINGS</b></h1>
+</div>
+<br><br>
+<div class="container ">
+
+
+    <div class="card w-100 text-center p-3 bg-light  ">
+        <img src="{% static 'images/user2.png'  %}" width="150px" height="150px" alt="" class=" rounded mb-2 mx-auto">
+
+        <div class="card body p-3 bg-light border-light" >
+            <p><b>FIRST NAME:</b> {{ user.first_name }} </p>
+            <p><b>LAST NAME:</b> {{ user.last_name }}</p>
+            <p><b>EMAIL:</b> {{ user.email }}</p>
+            <p><b>PHONE NUMBER:</b> {{ datas.Phone_number }} </p>
+            <button class="btn btn-danger mx-auto px-5"><a href="{% url 'editUserPage' user.id%}" class="text-white " style="text-decoration: none;"><b>EDIT</b></a></button>
+        </div>
+
+    </div>
+
+
+<!-- <h2 class="text-info">Hi {{ users.first_name }},</h2>
+<br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NUMBER</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ users.first_name }}</td>
+                <td>{{ users.last_name }}</td>
+                <td>{{ users.email }}</td>
+                <td>{{ datas.Phone_number }}</td>
+                <td><button>EDIT</button></td>
+            </tr>
+        </tbody>
+    </table> -->
+
+
+</div>
+	
+     
+</div>
+    
+</div>
+
+</div>
+
+<!-- navbar -->
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function () {
+				$('#sidebarCollapse').on('click', function () {
+					$('#sidebar').toggleClass('active');
+				});
+			});
+	
+	</script>
+	
+
+</body>
+</html>

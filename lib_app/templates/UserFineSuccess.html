@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title> User Order Success</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<style>
+
+
+	body{
+	font-family: 'Poppins', sans-serif;
+}
+
+/* side-nav bar */
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.wrapper{
+	display: flex;
+	text-decoration: none;
+	transition: all 0.3s;
+}
+
+#sidebar{
+	min-width: 250px;
+	max-width: 250px;
+	color: #fff;
+	transition: all 0.4s; 
+}
+
+
+#sidebar .sidebar-header{
+	padding: 30px;
+}
+#sidebar ul.components{
+	padding: 20px 0;
+	
+}
+
+
+#sidebar ul li a{
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+}
+
+a[data-toggle="collapse"]{
+	position: relative;
+}
+
+#content{
+	width: 100%;
+	padding-bottom: 30px;
+	min-height: 180vh;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+/* side-nav bar */
+
+
+ /* search bar */
+.input-group{
+        width: 40%;
+       }
+
+
+
+</style>
+<body>
+
+
+<!-- navbar -->
+<div class="wrapper">
+	
+ <nav id="sidebar" class="bg-info">
+ 	
+ 	 <div class="sidebar-header bg-info" >
+ 	 	<h2 style="font-family: 'Chakra Petch', sans-serif;">Library Management</h2>
+ 	 </div>
+
+	 <hr>
+
+ 	 <ul class="list-unstyled components">
+		<li class="active pb-3">
+			<a href="{% url 'userhomePage' %}" class="nav-item  text-white "
+				style="text-decoration: none; font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/hm.png' %}" width="30px" height="30px" alt="">  HOME </a>
+		</li>
+		
+		<li class="pb-3">
+			<a href="{% url 'userProfile' user.id %} " class="nav-item  text-white"
+				style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;"><img src="{% static 'images/user3.png' %}" width="30px" height="30px" alt=""> PROFILE</a>
+		</li>
+		<li class="pb-3">
+			<a href="{% url 'userBook' %}" class="text-white " style="text-decoration: none;font-size: 23px;font-family: 'Chakra Petch', sans-serif;" ><img src="{% static 'images/buk.png' %}" width="30px" height="30px" alt=""> BOOKS</a>
+		</li>
+ 	 	 	 	
+
+
+				  <li>
+					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-white" style="text-decoration: none;"><img src="{% static 'images/setting.gif' %}" width="40px" height="40px" alt=""></a>
+					<ul class="collapse list-unstyled" id="pageSubmenu">
+						<li>
+							<a href="{% url 'logout' %}" class="text-white" style="text-decoration: none;">LOGOUT</a>
+						</li>
+ 	 		</ul>
+ </nav>
+
+
+<div id="content" >	
+	
+  <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+	<button type="button" id="sidebarCollapse" class="btn  btn-light shadow-lg border-secondary">
+		<img src="{% static 'images/menu.png' %}" width="10px" height="10px" alt="">
+	</button>
+  	  </nav>
+
+<br><br>
+
+	
+        
+        <div class="container text-center ">
+      
+
+            <h2 class="text-info p-3 text-center mt-5" style="margin-left: 30px;"><b class="text-danger">Payment Success!! Make sure to submit your product on time for the next time!!</b></h2>
+          
+  
+          </div>
+
+          <div class="container text-center">
+            <a href="{% url 'userhomePage' %}" class="btn btn-danger">RETURN HOME</a>
+            </div>
+        
+       
+    </div>
+<br><br>
+
+
+
+<br><br>
+
+<br><br>
+
+<br><br>
+	
+     
+</div>
+    
+</div>
+
+</div>
+
+<!-- navbar -->
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	$(document).ready(function () {
+				$('#sidebarCollapse').on('click', function () {
+					$('#sidebar').toggleClass('active');
+				});
+			});
+	
+	</script>
+	
+
+</body>
+</html>
